@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
@@ -22,10 +23,25 @@ void empilha(int valor, pilhavet *p) {
 int desempilha(pilhavet*p){
     int aux;
     if(p -> topo<0){
-        printf("\nPilha Vazia")
+        printf("\nPilha Vazia");
         exit(1);
     }
     aux = p -> vet [p->topo];
     p-> topo--;
     return aux;
 }
+int main(void){
+    pilhavet pilha;
+    int valor;
+    pilha.topo =-1;
+    for (int i=0; i<TAM;i++){
+        printf("\nDigite o valor a ser empilhado: ");
+        scanf("%d",&valor);
+        empilha(valor,&pilha);
+    }
+    for (int i=0;i<TAM;i++){
+        printf("\n%d",desempilha(&pilha));
+    }
+    printf("\n");
+    system("pause");
+    }
