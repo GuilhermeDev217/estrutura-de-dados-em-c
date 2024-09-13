@@ -1,32 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-typedef struct{
-	int id;
-	int idade;
-	int renda;
-	char nome;
-}cliente;
+typedef struct {
+    int id;
+    int idade;
+    float renda;
+    char nome[100];
+} Cliente;
 
-int main(void){
-	cliente cadastro[5];
-	printf("Cadastro de clientes:");
-	for(int i=0;i<5;i++){
-		
-		printf("\n Digite o id do %d cliente", i+1);
-		scanf("%d", &cadastro[i].id);
-		printf("\n Digite a idade do %d cliente", i+1);
-		scanf("%d", &cadastro[i].idade);
-		printf("\n Digite a renda do %d cliente", i+1);
-		scanf("%f", &cadastro[i].renda);
-		printf("\n Digite o nome do %d cliente", i+1);
-		gets(cadastro[i].nome);
+int main(void) {
+    Cliente cadastro[1];
+    int maioresDeIdade = 0;
+
+    printf("Cadastro de clientes:\n");
+    for (int i = 0; i < 1; i++) {
+        printf("\nDigite o ID do %dº cliente: ", i + 1);
+        scanf("%d", &cadastro[i].id);
+        
+        printf("Digite a idade do %dº cliente: ", i + 1);
+        scanf("%d", &cadastro[i].idade);
+        
+        printf("Digite a renda do %dº cliente: ", i + 1);
+        scanf("%f", &cadastro[i].renda);
+        
+        while (getchar() != '\n');
+
+        printf("Digite o nome do %dº cliente: ", i + 1);
+        scanf("%99[^\n]", cadastro[i].nome);
+        getchar();
     }
-    for(int i=0; i=5;i++){
-    	if(cadastro[i].idade>=18){
-    		puts(cadastro[i].nome);
-		}
-	}
-	return 0;
+
+    printf("\nClientes maiores de idade:\n");
+    for (int i = 0; i < 1; i++) {
+        if (cadastro[i].idade >= 18) {
+            printf("Nome: %s, Idade: %d", cadastro[i].nome, cadastro[i].idade);
+            maioresDeIdade++;
+        }
+    }
+
+    printf("\nTotal de maiores de idade: %d\n", maioresDeIdade);
+
+    return 0;
 }
