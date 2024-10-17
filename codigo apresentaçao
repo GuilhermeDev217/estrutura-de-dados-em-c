@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+// Função para trocar dois elementos
+void trocar(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+// Função para particionar o array com base no pivô
+int particionar(int arr[], int inicio, int fim) {
+    int pivo = arr[fim]; // Escolhe o último elemento como pivô
+    int i = inicio - 1;   // Índice do menor elemento
+
+    // Coloca todos os menores elementos que o pivô à esquerda e os maiores à direita
+    for (int j = inicio; j <= fim - 1; j++) {
+        if (arr[j] < pivo) {
+            i++;
+            trocar(arr[i], arr[j]); // Troca elementos menores que o pivô para a esquerda
+        }
+    }
+    trocar(arr[i + 1], arr[fim]); // Coloca o pivô na posição correta
+    return (i + 1); // Retorna o índice do pivô
+}
+
+// Função principal de Quick Sort
+void quickSort(int arr[], int inicio, int fim) {
+    if (inicio < fim) {
+        // Índice do pivô após a partição
+        int pi = particionar(arr, inicio, fim);
+
+        // Ordena os elementos antes e depois da partição
+        quickSort(arr, inicio, pi - 1);
+        quickSort(arr, pi + 1, fim);
+    }
+}
+
+// Função para imprimir o array
+void imprimirArray(int arr[], int tamanho) {
+    for (int i = 0; i < tamanho; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    cout << "Array original: ";
+    imprimirArray(arr, n);
+
+    quickSort(arr, 0, n - 1);
+
+    cout << "Array ordenado: ";
+    imprimirArray(arr, n);
+
+    return 0;
+}
